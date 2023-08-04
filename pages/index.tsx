@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 import Navbar from "../components/Navbar";
 import Billboard from "../components/Billboard";
 import MovieList from "../components/MovieList";
-import userMovieList from "../hooks/userMovieList";
+import userMovieList from "../hooks/useMovieList";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);

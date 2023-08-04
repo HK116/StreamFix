@@ -1,5 +1,5 @@
 import React from "react";
-import useBillboard from "../hooks/userBillboard";
+import useBillboard from "../hooks/useBillboard";
 
 import { CiCircleInfo } from "react-icons/ci";
 
