@@ -5,9 +5,10 @@ import prismadb from '../../lib/prismadb'
 import serverAuth from "../../lib/serverAuth";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    // console.log(req)
     try {
         if (req.method === 'POST') {
-            const { currentUser } = await serverAuth(req);
+            const { currentUser } = await serverAuth(req, res);
 
             const { movieId } = req.body;
 
@@ -16,6 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     id: movieId,
                 }
             });
+            console.log(currentUser, existingMovie, movieId);
 
             if (!existingMovie) {
                 throw new Error('Invalid ID');
@@ -36,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         if (req.method === 'DELETE') {
-            const { currentUser } = await serverAuth(req)
+            const { currentUser } = await serverAuth(req, res)
 
             const { movieId } = req.body;
 
@@ -66,7 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         return res.status(405).end();
     } catch(error) {
-        console.log(error )
+        console.log("error fav: ", error)
         return res.status(400).end();
     }
 }

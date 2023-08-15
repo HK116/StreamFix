@@ -1,8 +1,8 @@
-import userSWR from 'swr';
+import useSwr from 'swr';
 import fetcher from '../lib/fetcher';
 
 const userMovieList = () => {
-    const {data, error, isLoading} = userSWR('/api/movies', fetcher, {
+    const {data, error, isLoading} = useSwr('/api/movies', fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
