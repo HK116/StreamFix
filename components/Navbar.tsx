@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { CiCircleChevDown, CiSearch, CiBellOn } from "react-icons/ci";
+import { useRouter } from "next/router";
 
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
@@ -12,21 +13,22 @@ const Navbar = () => {
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     const handleScroll = () => {
-        if (window.scrollY >= TOP_OFFSET) {
-            setShowBackground(true);
-        }
-        else {
-            setShowBackground(false);
-        }
-    }
+      if (window.scrollY >= TOP_OFFSET) {
+        setShowBackground(true);
+      } else {
+        setShowBackground(false);
+      }
+    };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-        window.removeEventListener('scroll', handleScroll);
-    }
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleMobileMenu = useCallback(() => {
@@ -38,21 +40,23 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="w-full fixed z-40">
-      <div
-        className={`px-4 md:px-16 py-6 flex flex-row item-center
-                transition duration-500 ${
-                    showBackground ? ' bg-zinc-900 bg-opacity-90' : ''
-                } `}
-      >
-        <img className="h-6 lg:h-11" src="/images/logo.png" alt="Logo" />
-        <div className="flex-row ml-8 gap-7 hidden lg:flex">
-          <NavbarItem label="Home" />
-          <NavbarItem label="TV Series" />
-          <NavbarItem label="Movies" />
-          <NavbarItem label="Trending" />
-          <NavbarItem label="Favorites" />
-          <NavbarItem label="Explore Languages" />
+    <nav
+      className={`w-full fixed z-40 flex gap-x-10 justify-center items-center
+                ${showBackground ? " bg-zinc-900 bg-opacity-90" : ""} 
+                transition duration-500
+      `}
+    >
+      <div className="px-4 md:px-16 py-6 w-11/12 flex ">
+        <div className="flex flex-row">
+          <img 
+            onClick={() => router.push("/")}
+            className="h-6 lg:h-11 cursor-pointer" src="/images/logo.png" alt="Logo" 
+          />
+          <div className="flex-row ml-8 gap-7 hidden lg:flex">
+            <NavbarItem onClick={() => router.push("/")} label="Home" />
+            <NavbarItem onClick={() => router.push("/movies")} label="Movies" />
+            <NavbarItem onClick={() => router.push("/favorites")} label="Favorites" />
+          </div>
         </div>
 
         <div
@@ -60,35 +64,27 @@ const Navbar = () => {
           className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
         >
           <p className="text-white text-sm">Browse</p>
-          <CiCircleChevDown className={`text-white transition w-6 h-6 ${
-                showMobileMenu ? "rotate-180" : "rotate-0"
-              }`}/>
+          <CiCircleChevDown
+            className={`text-white transition w-6 h-6 ${
+              showMobileMenu ? "rotate-180" : "rotate-0"
+            }`}
+          />
           <MobileMenu visible={showMobileMenu} />
         </div>
 
-        <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <CiSearch className="text-white transition w-6 h-6" />
-          </div>
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <CiBellOn className="text-white transition w-6 h-6" />
-          </div>
-
+        {/* <div className="flex flex-row ml-auto gap-7 items-center">
           <div
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"
-          >
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-full overflow-hidden">
-              <img src="/images/default-user.png" alt="Profile" />
-            </div>
-            <CiCircleChevDown
+          > */}
+            {/* <CiCircleChevDown
               className={`text-white transition w-6 h-6 ${
                 showAccountMenu ? "rotate-180" : "rotate-0"
               }`}
-            />
-            <AccountMenu visible={showAccountMenu} />
-          </div>
-        </div>
+            /> */}
+            <AccountMenu /*visible={showAccountMenu}*/ />
+          {/* </div>
+        </div> */}
       </div>
     </nav>
   );

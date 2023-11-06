@@ -50,19 +50,24 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
               className="cursor-pointer ml-auto group/item w-6 h-6 lg:w-10 lg:h-10 border-white 
                             border-2 rounded flex justify-center items-center transition hover:border-neutral-300"
             >
-              <BiExpandAlt className="text-white group-hover:text-neutral-300" size={20} />
+              <BiExpandAlt
+                className="text-white group-hover:text-neutral-300"
+                size={20}
+              />
             </div>
           </div>
-          <p className="text-green-400 font-semibold mt-4">
-            New <span className="text-white">2003</span>
-          </p>
+          <div className="flex flex-row justify-between">
+            <p className="text-green-400 font-semibold mt-4">{data.title}</p>
 
-          <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{data.duration}</p>
-          </div>
+            <div className="flex flex-row mt-4 gap-2 items-center">
+              <p className="text-white text-[10px] lg:text-sm">
+                {data.duration}
+              </p>
+            </div>
 
-          <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{data.genre}</p>
+            <div className="flex flex-row mt-4 gap-2 items-center">
+              <p className="text-white text-[10px] lg:text-sm">{data.genre}</p>
+            </div>
           </div>
         </div>
       </div>

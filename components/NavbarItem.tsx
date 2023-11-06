@@ -1,14 +1,17 @@
 import React from "react"
 
 interface NavbarItemsProps {
+    onClick?: () => void;
     label: string;
 }
 
 const NavbarItem: React.FC<NavbarItemsProps > = ({
-    label
+    onClick, label
 }) => {
     return (
-        <div className="text-white cursor-pointer hover:text-gray-300 
+        <div 
+            onClick={onClick}
+            className="text-white cursor-pointer hover:text-gray-300 
             transition text-center flex items-center">
             {label}
         </div>

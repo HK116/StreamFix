@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import React from "react";
 
 interface MobileMenuProps {
@@ -5,6 +7,8 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ visible }) => {
+  const router = useRouter();
+
   if (!visible) {
     return null;
   }
@@ -17,39 +21,25 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ visible }) => {
     >
       <div className="flex flex-col">
         <div
+          onClick={() => router.push("/")}
           className="border-b-2 border-green-950 px-3 
                 py-2 text-white hover:underline"
         >
           Home
         </div>
         <div
-          className="border-b-2 border-green-950 px-3 
-                py-2 text-white hover:underline"
-        >
-          TV Series
-        </div>
-        <div
+          onClick={() => router.push("/movies")}
           className="border-b-2 border-green-950 px-3 
                 py-2 text-white hover:underline"
         >
           Movies
         </div>
         <div
-          className="border-b-2 border-green-950 px-3 
-                py-2 text-white hover:underline"
-        >
-          Trending
-        </div>
-        <div
+          onClick={() => router.push("/favorites")}
           className="border-b-2 border-green-950 px-3 
                 py-2 text-white hover:underline"
         >
           Favorites
-        </div>
-        <div
-          className="px-3 py-2 text-white hover:underline"
-        >
-          Explore Languages
         </div>
       </div>
     </div>
